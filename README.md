@@ -5,7 +5,10 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 Update 1:
 
 Added a clickable button:
--changed button color
--gave button a drop shadow
--rounded the corners of the button
--increased the size of the button
+changed button color
+gave button a drop shadow
+rounded the corners of the button
+increased the size of the button
+
+Update 2:
+Added a counter to keep track of clicks
