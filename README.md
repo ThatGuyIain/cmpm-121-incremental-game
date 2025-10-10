@@ -11,4 +11,10 @@ rounded the corners of the button
 increased the size of the button
 
 Update 2:
+
 Added a counter to keep track of clicks
+
+Update 3:
+
+Finished Step 1 (Because I didn't properly read the instructions, whoops)
+Added an Emoji to the button

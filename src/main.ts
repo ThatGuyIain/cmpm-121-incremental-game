@@ -8,7 +8,7 @@ document.body.innerHTML = `
 
 document.body.innerHTML = `
   <h1>Incremental game</h1>
-  <button id = "button">Press</button>
+  <button id = "button">💣Press</button>
   <p> Counter: <span id = 'counter'>0</p>
 `;
 
