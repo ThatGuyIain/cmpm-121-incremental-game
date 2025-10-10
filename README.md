@@ -25,3 +25,11 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 - Changed the emoji on the button
 - Changed counter from "Counter: " to " ears of corn"
 - Made the theme about corn (This will change... probably)
+
+## Update 5
+
+- Completed step 3
+- Added a purchase auto clicker button
+- Added event handler to allow players to buy auto clickers
+- Added a set interval that manages auto clicker logics
+- Refactored some crucial game variables
