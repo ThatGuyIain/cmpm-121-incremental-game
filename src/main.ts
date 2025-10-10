@@ -8,8 +8,8 @@ document.body.innerHTML = `
 
 document.body.innerHTML = `
   <h1>Incremental game</h1>
-  <button id = "button">💣Press</button>
-  <p> Counter: <span id = 'counter'>0</p>
+  <button id = "button">🌽Press</button>
+  <p><span id = 'counter'>0</span> ears of corn</p>
 `;
 
 //creating a counter variable for counting the number of button presses
