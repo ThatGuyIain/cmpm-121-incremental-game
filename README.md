@@ -33,3 +33,10 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 - Added event handler to allow players to buy auto clickers
 - Added a set interval that manages auto clicker logics
 - Refactored some crucial game variables
+
+## Update 6
+
+- Completed step 4
+- Changed auto clickers to update based on frame rate instead rather than a set interval
+- Fixed bug that kept the auto clicker upgrade cost at 10
+- Minor changes in the way the upgrade cost is determined

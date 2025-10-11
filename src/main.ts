@@ -42,9 +42,11 @@ upgrade1.style.boxShadow = "0 4px 8px #4e4e4eff";
 upgrade1.style.borderRadius = "50px";
 upgrade1.style.scale = "1.4";
 
-//Adding an event listener to the upgrade button to increase the counter by 2 if the counter is greater than or equal to 10
+let upgradeOneCost: number = 10;
+
+//Adding an event listener to the upgrade button to increase the counter by 2 if the counter is greater than or equal to the upgrade cost
 upgrade1.addEventListener("click", () => {
-  if (Game.counter >= 10) {
+  if (Game.counter >= upgradeOneCost) {
     Game.counter -= 10;
     const counterElement = document.getElementById(
       "counter",
@@ -54,17 +56,28 @@ upgrade1.addEventListener("click", () => {
     const upgradeOneCostElement = document.getElementById(
       "upgradeOneCost",
     ) as HTMLSpanElement;
-    upgradeOneCostElement.innerText = (10 * (Game.autoclickers + 1)).toString();
+    upgradeOneCost = Math.ceil(13 * (Game.autoclickers + 1.3));
+    upgradeOneCostElement.innerText = upgradeOneCost.toString();
   }
 });
 
-//Autoclicker function that increments the counter by the number of autoclickers every second
-setInterval(() => {
-  if (Game.autoclickers > 0) {
-    Game.counter = Game.counter + 1;
-    const counterElement = document.getElementById(
-      "counter",
-    ) as HTMLSpanElement;
-    counterElement.innerText = Game.counter.toString();
-  }
-}, 1000 - (Game.autoclickers * 100)); //The more autoclickers you have, the faster the interval runs
+let lastTime = performance.now();
+
+function updateCounter(currentTime: number) {
+  const deltaTime = (currentTime - lastTime) / 1000;
+  lastTime = currentTime;
+
+  // Grow count continuously (e.g., 2 per second)
+  Game.counter += Game.autoclickers * deltaTime;
+
+  const counterElement = document.getElementById(
+    "counter",
+  ) as HTMLSpanElement;
+  counterElement.innerText = Game.counter.toString();
+  counterElement.innerText = Math.floor(Game.counter).toString(); // Display as whole number
+
+  // Loop again!
+  requestAnimationFrame(updateCounter);
+}
+
+requestAnimationFrame(updateCounter);
