@@ -40,3 +40,8 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 - Changed auto clickers to update based on frame rate instead rather than a set interval
 - Fixed bug that kept the auto clicker upgrade cost at 10
 - Minor changes in the way the upgrade cost is determined
+
+## Update 7
+
+- Completed step 5
+- Adjustments made to upgrade button that disables it when player can't afford it

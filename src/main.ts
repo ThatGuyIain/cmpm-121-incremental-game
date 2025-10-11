@@ -64,6 +64,18 @@ upgrade1.addEventListener("click", () => {
 let lastTime = performance.now();
 
 function updateCounter(currentTime: number) {
+  if (Game.counter < upgradeOneCost) {
+    const upgradeOne = document.getElementById(
+      "upgrade1",
+    ) as HTMLButtonElement;
+    upgradeOne.disabled = true;
+  } else {
+    const upgradeOne = document.getElementById(
+      "upgrade1",
+    ) as HTMLButtonElement;
+    upgradeOne.disabled = false;
+  }
+
   const deltaTime = (currentTime - lastTime) / 1000;
   lastTime = currentTime;
 
