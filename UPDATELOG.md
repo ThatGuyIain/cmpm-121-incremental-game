@@ -96,8 +96,12 @@
 - Moved the update log into it's own file
 - Added the code graveyard (This will be removed in a future update)
 
-### x
+### Step 9 Complete
 
 - Refactored pretty much everything
 - Interface and loops created to deal with button inputs, counter updates, amount updates, and rate updates
 - Tidied up code by moving segments around
+
+## Update 13
+
+- Changes to README.md
