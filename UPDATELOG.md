@@ -1,6 +1,4 @@
-# CMPM 121 D1 Project
-
-This is the starting point for your CMPM 121 D1 project. The goal of this project is to create a simple web application using TypeScript, Vite, and modern web development practices. Students should make sure to remove _this_ content from their README.md file and replace it with their own project documentation.
+# Update Logs
 
 ## Update 1
 
@@ -98,7 +96,7 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 - Moved the update log into it's own file
 - Added the code graveyard (This will be removed in a future update)
 
-### Step 9 Complete
+### x
 
 - Refactored pretty much everything
 - Interface and loops created to deal with button inputs, counter updates, amount updates, and rate updates
