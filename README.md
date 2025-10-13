@@ -76,6 +76,19 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 
 ## Update 10
 
-- Step 7 Complete
+### Step 7 Complete
+
 - Changed cost algorithm to change cost based on a 1.15 multiplier
 - Changed inner text to round numbers to their second decimal point
+
+## Update 11
+
+### Step 8 Complete
+
+- CORN THEME!!!!!!!!
+- Upgrade themes are as follows: Farmers, Farms, Tractors
+
+### Other updates
+
+- Increased sized of the corn clicker button
+- Slight adjustments in positioning to other elements to accommodate the new clicker size

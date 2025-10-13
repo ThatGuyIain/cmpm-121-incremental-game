@@ -12,10 +12,10 @@ body {
   position: absolute;
   background: none;
   border: none;
-  scale: 5;
+  scale: 10;
   left: 49%;
   border-radius: 50px;
-  top: 23%;
+  top: 30%;
 }
 #upgrade1 {
   position: absolute;
@@ -47,6 +47,6 @@ body {
 #CPS {
   position: absolute;
   left: 44.8%;
-  top: 29%;
+  top: 42%;
   scale: 0.7;
 }
