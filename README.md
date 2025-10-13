@@ -45,3 +45,19 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 
 - Completed step 5
 - Adjustments made to upgrade button that disables it when player can't afford it
+
+## Update 8
+
+- Refactored button customizations into style.css
+- Refactored variables so that variables created multiple times are defined in main
+- Turned upgrade cost into a game variable
+- Added a second upgrade
+- Refactored disable check into a helper function
+- Refactored purchase check into a helper function
+- Moved upgrade buttons to the bottom right of the screen
+- Centered text
+- Changed background color
+- Changed button to be Corn (become one with the corn)
+- updated first upgrade text to be more thematic
+- Made slight adjustments to the price scaling algorithm
+- Add text that shows the amount of corn produced per second
