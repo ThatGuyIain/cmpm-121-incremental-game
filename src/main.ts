@@ -1,10 +1,4 @@
-//import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
-/*
-document.body.innerHTML = `
-  <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
-`;
-*/
 
 document.body.innerHTML = `
   <head>
@@ -12,63 +6,81 @@ document.body.innerHTML = `
   </head>
   <h1>🌽 Corn Clicker 🌽</h1>
   <p><span id = 'counter'>0</span> ears of corn</p>
-  <button id = "upgrade1">Hire a Corn Farmer(<span id = upgradeOneCost>10</span> ears)</button>
-  <button id = "upgrade2">Buy a Corn Field (<span id = upgradeTwoCost>100</span> ears)</button>
-  <button id = 'upgrade3'>Buy a Tractor (<span id = upgradeThreeCost>1000</span> ears)</button>
+  <button id = "farmers">Hire a Corn Farmer(<span id = upgradeOneCost>10</span> ears)</button>
+  <button id = "farms">Buy a Corn Field (<span id = upgradeTwoCost>100</span> ears)</button>
+  <button id = 'tractors'>Buy a Tractor (<span id = upgradeThreeCost>1000</span> ears)</button>
+  <button id = "factories">Buy a Factory (<span id = upgradeFourCost>10000</span> ears)</button>
+  <button id = "theaters">Buy a Theater (<span id = upgradeFiveCost>100000</span> ears)</button>
   <p id = 'CPS'><span id = 'growth' >0</span> corn per second</p>
 `;
 
-//Initializing upgrade button elements
-const farmers = document.getElementById("upgrade1") as HTMLButtonElement;
-const farms = document.getElementById("upgrade2") as HTMLButtonElement;
-const tractors = document.getElementById("upgrade3") as HTMLButtonElement;
-
-// Initializing upgrade cost elements
-const upgradeOneCostElement = document.getElementById(
-  "upgradeOneCost",
-) as HTMLSpanElement;
-const upgradeTwoCostElement = document.getElementById(
-  "upgradeTwoCost",
-) as HTMLSpanElement;
-const upgradeThreeCostElement = document.getElementById(
-  "upgradeThreeCost",
-) as HTMLSpanElement;
-
+// Defining an upgrade type to hold all the properties of an upgrade
 interface upgradeType {
   name: HTMLButtonElement;
   cost: number;
   rate: number;
   amount: number;
   costElement: HTMLSpanElement;
+  description: string;
 }
 
+// Creating an array of upgrades to hold all the upgrade objects
 const upgrades: upgradeType[] = [
   {
-    name: farmers,
+    name: document.getElementById("farmers") as HTMLButtonElement,
     cost: 10,
     rate: 0.1,
     amount: 0,
-    costElement: upgradeOneCostElement,
+    costElement: document.getElementById(
+      "upgradeOneCost",
+    ) as HTMLSpanElement,
+    description: "A very very VERY underpaid farmer",
   },
   {
-    name: farms,
+    name: document.getElementById("farms") as HTMLButtonElement,
     cost: 100,
     rate: 2,
     amount: 0,
-    costElement: upgradeTwoCostElement,
+    costElement: document.getElementById(
+      "upgradeTwoCost",
+    ) as HTMLSpanElement,
+    description: "A new plot of land to grow even more corn",
   },
   {
-    name: tractors,
+    name: document.getElementById("tractors") as HTMLButtonElement,
     cost: 1000,
     rate: 50,
     amount: 0,
-    costElement: upgradeThreeCostElement,
+    costElement: document.getElementById(
+      "upgradeThreeCost",
+    ) as HTMLSpanElement,
+    description: "A tractor improves efficiency tenfold",
+  },
+  {
+    name: document.getElementById("factories") as HTMLButtonElement,
+    cost: 10000,
+    rate: 100,
+    amount: 0,
+    costElement: document.getElementById(
+      "upgradeFourCost",
+    ) as HTMLSpanElement,
+    description: "Get that pipeline going to get corn to the masses",
+  },
+  {
+    name: document.getElementById("theaters") as HTMLButtonElement,
+    cost: 100000,
+    rate: 200,
+    amount: 0,
+    costElement: document.getElementById(
+      "upgradeFiveCost",
+    ) as HTMLSpanElement,
+    description: "Why just sell corn when you can also sell popcorn?",
   },
 ];
 
 //Game countainer that holds all the game variables
 const Game = {
-  counter: 10000,
+  counter: 0,
 };
 
 //Creating a button variable and customizing it's properties
@@ -76,15 +88,17 @@ const button = document.createElement("button");
 button.id = "button";
 document.body.appendChild(button);
 button.innerText = "🌽";
+button.title =
+  "The corn calls for you... Submit to the corn... become one with the corn... everything is corn... 🌽";
 
-//Adding an event listener to the button to increment the counter variable and log it to the console
+//Creating a counter variable and customizing it's properties
+const counterElement = document.getElementById("counter") as HTMLSpanElement;
+
+//Adding an event listener to the button to increment the counter variable
 button.addEventListener("click", () => {
   Game.counter++;
   counterElement.innerText = Game.counter.toString();
 });
-
-//Creating a counter variable and customizing it's properties
-const counterElement = document.getElementById("counter") as HTMLSpanElement;
 
 //Helper function to deduct the cost of an upgrade from the counter
 function purchase(cost: number) {
@@ -95,6 +109,7 @@ function purchase(cost: number) {
 //Function to add event listeners to all upgrade buttons
 function eventListeners() {
   for (const upgrade of upgrades) {
+    upgrade.name.title = upgrade.description;
     upgrade.name.addEventListener("click", () => {
       if (Game.counter >= upgrade.cost) {
         purchase(upgrade.cost);
@@ -177,95 +192,3 @@ function update(currentTime: number) {
 }
 // Start the update loop
 requestAnimationFrame(update);
-
-/*
-//Creating an upgrade button variables and customizing their properties
-const upgrade1 = document.getElementById("upgrade1") as HTMLButtonElement;
-const upgrade2 = document.getElementById("upgrade2") as HTMLButtonElement;
-const upgrade3 = document.getElementById("upgrade3") as HTMLButtonElement;
-*/
-
-/*
-//Creating upgrade cost variables and customizing it's properties
-const upgradeOneCostElement = document.getElementById(
-"upgradeOneCost",
-) as HTMLSpanElement;
-const upgradeTwoCostElement = document.getElementById(
-  "upgradeTwoCost",
-) as HTMLSpanElement;
-const upgradeThreeCostElement = document.getElementById(
-  "upgradeThreeCost",
-) as HTMLSpanElement;
- */
-
-/*
-//Adding an event listener to the upgrade button to increase the counter by 1 if the counter is greater than or equal to the upgrade cost
-upgrade1.addEventListener("click", () => {
-  if (Game.counter >= Game.upgradeOneCost) {
-    costCheck(Game.upgradeOneCost);
-    Game.farmers++;
-    //Game.upgradeOneCost = Math.ceil(1.5 * (Game.upgradeOneCost + 1.2));
-    Game.upgradeOneCost = Game.upgradeOneCost * 1.15;
-    upgradeOneCostElement.innerText = Game.upgradeOneCost.toFixed(2).toString();
-  }
-});
-
-
-
-//Adding an event listener to the upgrade button to increase the counter by 1 if the counter is greater than or equal to the upgrade cost
-upgrade2.addEventListener("click", () => {
-  if (Game.counter >= Game.upgradeTwoCost) {
-    purchase(Game.upgradeTwoCost);
-    Game.farms++;
-    //Game.upgradeTwoCost = Math.ceil(1.6 * (Game.upgradeTwoCost + 7));
-    Game.upgradeTwoCost = Game.upgradeTwoCost * 1.15;
-    upgradeTwoCostElement.innerText = Game.upgradeTwoCost.toFixed(2).toString();
-  }
-});
-
-upgrade3.addEventListener("click", () => {
-  if (Game.counter >= Game.upgradeThreeCost) {
-    purchase(Game.upgradeThreeCost);
-    Game.tractors++;
-    //Game.upgradeThreeCost = Math.ceil(1.7 * (Game.upgradeThreeCost + 50));
-    Game.upgradeThreeCost = Game.upgradeThreeCost * 1.15;
-    upgradeThreeCostElement.innerText = Game.upgradeThreeCost.toFixed(2)
-      .toString();
-  }
-});
-*/
-
-/*
-// Helper function to check if the player can afford an upgrade and disable/enable the button accordingly
-function disableCheck(
-  counter: number,
-  cost: number,
-  upgrade: HTMLButtonElement,
-) {
-  if (counter < cost) {
-    upgrade.disabled = true;
-  } else {
-    upgrade.disabled = false;
-  }
-}
-*/
-
-/*
-function update(currentTime: number) {
-  const deltaTime = (currentTime - lastTime) / 1000;
-  lastTime = currentTime;
-
-  // Check if the player can afford upgrades and enable/disable buttons accordingly
-  disableCheck(Game.counter, Game.upgradeOneCost, upgrade1);
-  disableCheck(Game.counter, Game.upgradeTwoCost, upgrade2);
-  disableCheck(Game.counter, Game.upgradeThreeCost, upgrade3);
-
-  // Update the counter based on auto-clickers
-  updateCounter(deltaTime);
-  // Update the CPS display
-  updateCPS();
-
-  // Loop again!
-  requestAnimationFrame(update);
-}
-*/

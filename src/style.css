@@ -17,7 +17,25 @@ body {
   border-radius: 50px;
   top: 30%;
 }
-#upgrade1 {
+#farmers {
+  position: absolute;
+  background-color: #ddab3fff;
+  box-shadow: 0 4px 8px #4e4e4eff;
+  border-radius: 50px;
+  scale: 1.4;
+  left: 81%;
+  bottom: 28%;
+}
+#farms {
+  position: absolute;
+  background-color: #ddab3fff;
+  box-shadow: 0 4px 8px #4e4e4eff;
+  border-radius: 50px;
+  scale: 1.4;
+  left: 80.8%;
+  bottom: 22%;
+}
+#tractors {
   position: absolute;
   background-color: #ddab3fff;
   box-shadow: 0 4px 8px #4e4e4eff;
@@ -26,7 +44,7 @@ body {
   left: 81%;
   bottom: 16%;
 }
-#upgrade2 {
+#factories {
   position: absolute;
   background-color: #ddab3fff;
   box-shadow: 0 4px 8px #4e4e4eff;
@@ -35,7 +53,7 @@ body {
   left: 80.8%;
   bottom: 10%;
 }
-#upgrade3 {
+#theaters {
   position: absolute;
   background-color: #ddab3fff;
   box-shadow: 0 4px 8px #4e4e4eff;

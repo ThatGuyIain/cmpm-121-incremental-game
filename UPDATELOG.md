@@ -105,3 +105,16 @@
 ## Update 13
 
 - Changes to README.md
+
+## Update 14
+
+- Refactored the way upgrades are intialized
+- Updated upgrade IDs to be more clear in main.ts and in style.css
+- Dug up the code graveyard
+- Reset value of corn to zero (Was 10000 for testing purposes)
+
+### Step 10 complete
+
+- Added Factory and Theater upgrades
+- Added description text when hovering over upgrades
+- Added a secret when hovering over the corn button :>
