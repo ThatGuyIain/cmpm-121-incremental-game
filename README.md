@@ -61,3 +61,15 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 - updated first upgrade text to be more thematic
 - Made slight adjustments to the price scaling algorithm
 - Add text that shows the amount of corn produced per second
+
+## Update 9
+
+### Step 6 complete
+
+- Second upgrade added in Update 8
+- Corn per second counter implemented in prior update
+- Added a third upgrade
+
+### Other Changes
+
+- Refactored update loop

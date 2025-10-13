@@ -24,7 +24,7 @@ body {
   border-radius: 50px;
   scale: 1.4;
   left: 81%;
-  bottom: 10%;
+  bottom: 16%;
 }
 #upgrade2 {
   position: absolute;
@@ -33,6 +33,15 @@ body {
   border-radius: 50px;
   scale: 1.4;
   left: 80.8%;
+  bottom: 10%;
+}
+#upgrade3 {
+  position: absolute;
+  background-color: #ddab3fff;
+  box-shadow: 0 4px 8px #4e4e4eff;
+  border-radius: 50px;
+  scale: 1.4;
+  left: 81%;
   bottom: 4%;
 }
 #CPS {

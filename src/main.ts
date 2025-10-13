@@ -13,8 +13,9 @@ document.body.innerHTML = `
   <h1>🌽 Corn Clicker 🌽</h1>
   <button id = "button">🌽</button>
   <p><span id = 'counter'>0</span> ears of corn</p>
-  <button id = "upgrade1">Hire Corn Farmer(<span id = upgradeOneCost>10</span> ears)</button>
-  <button id = "upgrade2">Buy A corn field (<span id = upgradeTwoCost>100</span> ears)</button>
+  <button id = "upgrade1">Hire a Corn Farmer(<span id = upgradeOneCost>10</span> ears)</button>
+  <button id = "upgrade2">Buy a Corn Field (<span id = upgradeTwoCost>100</span> ears)</button>
+  <button id = 'upgrade3'>Buy a Tractor (<span id = upgradeThreeCost>1000</span> ears)</button>
   <p id = 'CPS'><span id = 'growth' >0</span> corn per second</p>
 `;
 
@@ -23,30 +24,32 @@ const Game = {
   counter: 10000,
   farmers: 0,
   farms: 0,
+  tractors: 0,
   upgradeOneCost: 10,
   upgradeTwoCost: 100,
+  upgradeThreeCost: 1000,
 };
 
 //Creating a button variable and customizing it's properties
 const button = document.getElementById("button") as HTMLButtonElement;
 
-//Creating an upgrade button variable and customizing it's properties
+//Creating an upgrade button variables and customizing their properties
 const upgrade1 = document.getElementById("upgrade1") as HTMLButtonElement;
-
-//Creating a second upgrade button variable and customizing it's properties
 const upgrade2 = document.getElementById("upgrade2") as HTMLButtonElement;
+const upgrade3 = document.getElementById("upgrade3") as HTMLButtonElement;
 
 //Creating a counter variable and customizing it's properties
 const counterElement = document.getElementById("counter") as HTMLSpanElement;
 
-//Creating an upgrade cost variable and customizing it's properties
+//Creating upgrade cost variables and customizing it's properties
 const upgradeOneCostElement = document.getElementById(
   "upgradeOneCost",
 ) as HTMLSpanElement;
-
-//Creating an upgrade cost variable and customizing it's properties
 const upgradeTwoCostElement = document.getElementById(
   "upgradeTwoCost",
+) as HTMLSpanElement;
+const upgradeThreeCostElement = document.getElementById(
+  "upgradeThreeCost",
 ) as HTMLSpanElement;
 
 //Adding an event listener to the button to increment the counter variable and log it to the console
@@ -81,6 +84,15 @@ upgrade2.addEventListener("click", () => {
   }
 });
 
+upgrade3.addEventListener("click", () => {
+  if (Game.counter >= Game.upgradeThreeCost) {
+    costCheck(Game.upgradeThreeCost);
+    Game.tractors++;
+    Game.upgradeThreeCost = Math.ceil(1.7 * (Game.upgradeThreeCost + 50));
+    upgradeThreeCostElement.innerText = Game.upgradeThreeCost.toString();
+  }
+});
+
 // Helper function to check if the player can afford an upgrade and disable/enable the button accordingly
 function disableCheck(
   counter: number,
@@ -96,31 +108,40 @@ function disableCheck(
 
 function updateCPS() {
   const cpsGrowth = document.getElementById("growth") as HTMLSpanElement;
-  const cps: number = (Game.farmers * .1) + (Game.farms * 2);
+  const cps: number = (Game.farmers * .1) + (Game.farms * 2) +
+    (Game.tractors * 50);
   cpsGrowth.innerText = cps.toFixed(1).toString();
+}
+
+function updateCounter(deltaTime: number) {
+  // Grow count continuously (e.g., 2 per second)
+  Game.counter += Game.farmers * 0.1 * deltaTime;
+  Game.counter += Game.farms * 2 * deltaTime;
+  Game.counter += Game.tractors * 50 * deltaTime;
+
+  // Update the displayed counter to the floored value of Game.counter
+  counterElement.innerText = Math.floor(Game.counter).toString();
 }
 
 // Function to update the counter display and handle auto-clickers
 let lastTime = performance.now();
 
-function updateCounter(currentTime: number) {
-  // Check if the player can afford upgrades and enable/disable buttons accordingly
-  disableCheck(Game.counter, Game.upgradeOneCost, upgrade1);
-  disableCheck(Game.counter, Game.upgradeTwoCost, upgrade2);
-
+function update(currentTime: number) {
   const deltaTime = (currentTime - lastTime) / 1000;
   lastTime = currentTime;
 
-  // Grow count continuously (e.g., 2 per second)
-  Game.counter += Game.farmers * 0.1 * deltaTime;
-  Game.counter += Game.farms * 2 * deltaTime;
+  // Check if the player can afford upgrades and enable/disable buttons accordingly
+  disableCheck(Game.counter, Game.upgradeOneCost, upgrade1);
+  disableCheck(Game.counter, Game.upgradeTwoCost, upgrade2);
+  disableCheck(Game.counter, Game.upgradeThreeCost, upgrade3);
 
-  // Update the displayed counter to the floored value of Game.counter
-  counterElement.innerText = Math.floor(Game.counter).toString();
+  // Update the counter based on auto-clickers
+  updateCounter(deltaTime);
+  // Update the CPS display
   updateCPS();
 
   // Loop again!
-  requestAnimationFrame(updateCounter);
+  requestAnimationFrame(update);
 }
 
-requestAnimationFrame(updateCounter);
+requestAnimationFrame(update);
