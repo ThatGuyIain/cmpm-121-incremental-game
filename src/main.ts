@@ -69,8 +69,9 @@ upgrade1.addEventListener("click", () => {
   if (Game.counter >= Game.upgradeOneCost) {
     costCheck(Game.upgradeOneCost);
     Game.farmers++;
-    Game.upgradeOneCost = Math.ceil(1.5 * (Game.upgradeOneCost + 1.2));
-    upgradeOneCostElement.innerText = Game.upgradeOneCost.toString();
+    //Game.upgradeOneCost = Math.ceil(1.5 * (Game.upgradeOneCost + 1.2));
+    Game.upgradeOneCost = Game.upgradeOneCost * 1.15;
+    upgradeOneCostElement.innerText = Game.upgradeOneCost.toFixed(2).toString();
   }
 });
 
@@ -79,8 +80,9 @@ upgrade2.addEventListener("click", () => {
   if (Game.counter >= Game.upgradeTwoCost) {
     costCheck(Game.upgradeTwoCost);
     Game.farms++;
-    Game.upgradeTwoCost = Math.ceil(1.6 * (Game.upgradeTwoCost + 7));
-    upgradeTwoCostElement.innerText = Game.upgradeTwoCost.toString();
+    //Game.upgradeTwoCost = Math.ceil(1.6 * (Game.upgradeTwoCost + 7));
+    Game.upgradeTwoCost = Game.upgradeTwoCost * 1.15;
+    upgradeTwoCostElement.innerText = Game.upgradeTwoCost.toFixed(2).toString();
   }
 });
 
@@ -88,8 +90,10 @@ upgrade3.addEventListener("click", () => {
   if (Game.counter >= Game.upgradeThreeCost) {
     costCheck(Game.upgradeThreeCost);
     Game.tractors++;
-    Game.upgradeThreeCost = Math.ceil(1.7 * (Game.upgradeThreeCost + 50));
-    upgradeThreeCostElement.innerText = Game.upgradeThreeCost.toString();
+    //Game.upgradeThreeCost = Math.ceil(1.7 * (Game.upgradeThreeCost + 50));
+    Game.upgradeThreeCost = Game.upgradeThreeCost * 1.15;
+    upgradeThreeCostElement.innerText = Game.upgradeThreeCost.toFixed(2)
+      .toString();
   }
 });
 

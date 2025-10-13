@@ -73,3 +73,9 @@ This is the starting point for your CMPM 121 D1 project. The goal of this projec
 ### Other Changes
 
 - Refactored update loop
+
+## Update 10
+
+- Step 7 Complete
+- Changed cost algorithm to change cost based on a 1.15 multiplier
+- Changed inner text to round numbers to their second decimal point
