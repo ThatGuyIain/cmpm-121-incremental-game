@@ -125,25 +125,18 @@ function disableCheck() {
 }
 
 // Helper function to calculate the total CPS from all upgrades
-function calcCPS(): number {
-  let cps = 0;
+function calcCornPerSecond(): number {
+  let CornPerSecond = 0;
 
   for (const upgrade of upgrades) {
-    cps += upgrade.amount * upgrade.rate;
+    CornPerSecond += upgrade.amount * upgrade.rate;
   }
 
-  return cps;
+  return CornPerSecond;
 }
 
 // HelperFunction to update the counter based on auto-clickers
 function updateCounter(deltaTime: number) {
-  // Grow count continuously (e.g., 2 per second)
-  /*
-  counter += Game.farmers * 0.1 * deltaTime;
-  counter += Game.farms * 2 * deltaTime;
-  counter += Game.tractors * 50 * deltaTime;
-  */
-
   for (const upgrade of upgrades) {
     counter += upgrade.amount * upgrade.rate * deltaTime;
   }
@@ -152,15 +145,13 @@ function updateCounter(deltaTime: number) {
   counterElement.innerText = Math.floor(counter).toString();
 }
 
-// Helper Function to update the CPS display
-function updateCPS() {
-  const cpsGrowth = document.getElementById("growth") as HTMLSpanElement;
-  /*
-  const cps: number = (Game.farmers * .1) + (Game.farms * 2) +
-    (Game.tractors * 50);
-    */
-  const cps: number = calcCPS();
-  cpsGrowth.innerText = cps.toFixed(1).toString();
+// Helper Function to update the cornPerSecond display
+function updateCornPerSecond() {
+  const cornPerSecondGrowth = document.getElementById(
+    "growth",
+  ) as HTMLSpanElement;
+  const cornPerSecond: number = calcCornPerSecond();
+  cornPerSecondGrowth.innerText = cornPerSecond.toFixed(1).toString();
 }
 
 /*~~~~~~~~~~~~~~~~~~ UPDATE LOOP & GAME TICKERS ~~~~~~~~~~~~~~~~~~*/
@@ -176,8 +167,8 @@ function update(currentTime: number) {
 
   // Update the counter based on auto-clickers
   updateCounter(deltaTime);
-  // Update the CPS display
-  updateCPS();
+  // Update the cornPerSecond display
+  updateCornPerSecond();
 
   // Loop again!
   requestAnimationFrame(update);
@@ -192,7 +183,7 @@ button.addEventListener("click", () => {
 });
 
 //Function to add event listeners to all upgrade buttons
-function eventListeners() {
+function initializeEventListeners() {
   for (const upgrade of upgrades) {
     upgrade.name.title = upgrade.description;
     upgrade.name.addEventListener("click", () => {
@@ -206,7 +197,7 @@ function eventListeners() {
   }
 }
 
-eventListeners();
+initializeEventListeners();
 
 /*~~~~~~~~~~~~~~~~~~ START ~~~~~~~~~~~~~~~~~~*/
 // Start the update loop
