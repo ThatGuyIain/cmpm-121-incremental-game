@@ -1,5 +1,30 @@
 import "./style.css";
 
+/******************************/
+//Game State
+//UI Elements
+//Upgrade Definitions
+//Update Loop & Game Tickers
+//Event Listeners
+//Start
+/******************************/
+
+/*~~~~~~~~~~~~~~~~~~ GAME STATE ~~~~~~~~~~~~~~~~~~*/
+
+// Defining an upgrade type to hold all the properties of an upgrade
+interface upgradeType {
+  name: HTMLButtonElement;
+  cost: number;
+  rate: number;
+  amount: number;
+  costElement: HTMLSpanElement;
+  description: string;
+}
+
+let counter = 0;
+
+/*~~~~~~~~~~~~~~~~~~ UI ELEMENTS ~~~~~~~~~~~~~~~~~~*/
+
 document.body.innerHTML = `
   <head>
     <title>Incremental game</title>
@@ -14,15 +39,17 @@ document.body.innerHTML = `
   <p id = 'CPS'><span id = 'growth' >0</span> corn per second</p>
 `;
 
-// Defining an upgrade type to hold all the properties of an upgrade
-interface upgradeType {
-  name: HTMLButtonElement;
-  cost: number;
-  rate: number;
-  amount: number;
-  costElement: HTMLSpanElement;
-  description: string;
-}
+//Creating a button variable and customizing it's properties
+const button = document.createElement("button");
+button.id = "button";
+document.body.appendChild(button);
+button.innerText = "🌽";
+button.title =
+  "The corn calls for you... Submit to the corn... become one with the corn... everything is corn... 🌽";
+
+const counterElement = document.getElementById("counter") as HTMLSpanElement;
+
+/*~~~~~~~~~~~~~~~~~~ UPGRADE DEFINITIONS ~~~~~~~~~~~~~~~~~~*/
 
 // Creating an array of upgrades to hold all the upgrade objects
 const upgrades: upgradeType[] = [
@@ -78,54 +105,18 @@ const upgrades: upgradeType[] = [
   },
 ];
 
-//Game countainer that holds all the game variables
-const Game = {
-  counter: 0,
-};
-
-//Creating a button variable and customizing it's properties
-const button = document.createElement("button");
-button.id = "button";
-document.body.appendChild(button);
-button.innerText = "🌽";
-button.title =
-  "The corn calls for you... Submit to the corn... become one with the corn... everything is corn... 🌽";
-
-//Creating a counter variable and customizing it's properties
-const counterElement = document.getElementById("counter") as HTMLSpanElement;
-
-//Adding an event listener to the button to increment the counter variable
-button.addEventListener("click", () => {
-  Game.counter++;
-  counterElement.innerText = Game.counter.toString();
-});
+/*~~~~~~~~~~~~~~~~~~ HELPER FUNCTIONS ~~~~~~~~~~~~~~~~~~*/
 
 //Helper function to deduct the cost of an upgrade from the counter
 function purchase(cost: number) {
-  Game.counter -= cost;
-  counterElement.innerText = Game.counter.toString();
+  counter -= cost;
+  counterElement.innerText = counter.toString();
 }
-
-//Function to add event listeners to all upgrade buttons
-function eventListeners() {
-  for (const upgrade of upgrades) {
-    upgrade.name.title = upgrade.description;
-    upgrade.name.addEventListener("click", () => {
-      if (Game.counter >= upgrade.cost) {
-        purchase(upgrade.cost);
-        upgrade.amount++;
-        upgrade.cost = upgrade.cost * 1.15;
-        upgrade.costElement.innerText = upgrade.cost.toFixed(2).toString();
-      }
-    });
-  }
-}
-eventListeners();
 
 // Helper function to check if the player can afford an upgrade and disable/enable the button accordingly
 function disableCheck() {
   for (const upgrade of upgrades) {
-    if (Game.counter < upgrade.cost) {
+    if (counter < upgrade.cost) {
       upgrade.name.disabled = true;
     } else {
       upgrade.name.disabled = false;
@@ -144,6 +135,23 @@ function calcCPS(): number {
   return cps;
 }
 
+// HelperFunction to update the counter based on auto-clickers
+function updateCounter(deltaTime: number) {
+  // Grow count continuously (e.g., 2 per second)
+  /*
+  counter += Game.farmers * 0.1 * deltaTime;
+  counter += Game.farms * 2 * deltaTime;
+  counter += Game.tractors * 50 * deltaTime;
+  */
+
+  for (const upgrade of upgrades) {
+    counter += upgrade.amount * upgrade.rate * deltaTime;
+  }
+
+  // Update the displayed counter to the floored value of counter
+  counterElement.innerText = Math.floor(counter).toString();
+}
+
 // Helper Function to update the CPS display
 function updateCPS() {
   const cpsGrowth = document.getElementById("growth") as HTMLSpanElement;
@@ -155,26 +163,10 @@ function updateCPS() {
   cpsGrowth.innerText = cps.toFixed(1).toString();
 }
 
-// HelperFunction to update the counter based on auto-clickers
-function updateCounter(deltaTime: number) {
-  // Grow count continuously (e.g., 2 per second)
-  /*
-  Game.counter += Game.farmers * 0.1 * deltaTime;
-  Game.counter += Game.farms * 2 * deltaTime;
-  Game.counter += Game.tractors * 50 * deltaTime;
-  */
+/*~~~~~~~~~~~~~~~~~~ UPDATE LOOP & GAME TICKERS ~~~~~~~~~~~~~~~~~~*/
 
-  for (const upgrade of upgrades) {
-    Game.counter += upgrade.amount * upgrade.rate * deltaTime;
-  }
-
-  // Update the displayed counter to the floored value of Game.counter
-  counterElement.innerText = Math.floor(Game.counter).toString();
-}
-
-// Function to update the counter display and handle auto-clickers
 let lastTime = performance.now();
-
+// Function to update the counter display and handle auto-clickers
 function update(currentTime: number) {
   const deltaTime = (currentTime - lastTime) / 1000;
   lastTime = currentTime;
@@ -190,5 +182,32 @@ function update(currentTime: number) {
   // Loop again!
   requestAnimationFrame(update);
 }
+
+/*~~~~~~~~~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~~~~~~~~~*/
+
+//Adding an event listener to the button to increment the counter variable
+button.addEventListener("click", () => {
+  counter++;
+  counterElement.innerText = counter.toString();
+});
+
+//Function to add event listeners to all upgrade buttons
+function eventListeners() {
+  for (const upgrade of upgrades) {
+    upgrade.name.title = upgrade.description;
+    upgrade.name.addEventListener("click", () => {
+      if (counter >= upgrade.cost) {
+        purchase(upgrade.cost);
+        upgrade.amount++;
+        upgrade.cost = upgrade.cost * 1.15;
+        upgrade.costElement.innerText = upgrade.cost.toFixed(2).toString();
+      }
+    });
+  }
+}
+
+eventListeners();
+
+/*~~~~~~~~~~~~~~~~~~ START ~~~~~~~~~~~~~~~~~~*/
 // Start the update loop
 requestAnimationFrame(update);
