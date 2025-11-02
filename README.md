@@ -16,3 +16,8 @@ This is a clicker game about farming corn
 - Add additional upgrades
 - Give upgrades a fun description
 - Probably more refactoring
+
+### Credits
+
+- clicker button being able to run away was originally designed and from Andrew Richmond (acrmine)
+- Upgrade hover inspired by Kaitlyn Eng (kaitlyn-png)

@@ -1,9 +1,9 @@
-/*.icon {
-  width: 64px;
-  vertical-align: top;
-  border: 1px solid salmon;
-}*/
 body {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  align-items: top;
+  justify-content: center;
   background-color: #f0e68cff;
   text-align: center;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -12,10 +12,11 @@ body {
   position: absolute;
   background: none;
   border: none;
-  scale: 10;
-  left: 49%;
   border-radius: 50px;
-  top: 30%;
+  padding: 1px;
+  font-size: 80px;
+  width: 90px;
+  height: 90px;
 }
 #farmers {
   position: absolute;
@@ -25,6 +26,10 @@ body {
   scale: 1.4;
   left: 81%;
   bottom: 28%;
+  transition: 0.1s ease;
+}
+#farmers:hover {
+  animation: pulse-fast 0.5s ease-in-out infinite;
 }
 #farms {
   position: absolute;
@@ -35,6 +40,9 @@ body {
   left: 80.8%;
   bottom: 22%;
 }
+#farms:hover {
+  animation: pulse-fast 0.5s ease-in-out infinite;
+}
 #tractors {
   position: absolute;
   background-color: #ddab3fff;
@@ -43,6 +51,9 @@ body {
   scale: 1.4;
   left: 81%;
   bottom: 16%;
+}
+#tractors:hover {
+  animation: pulse-fast 0.5s ease-in-out infinite;
 }
 #factories {
   position: absolute;
@@ -53,6 +64,9 @@ body {
   left: 80.8%;
   bottom: 10%;
 }
+#factories:hover {
+  animation: pulse-fast 0.5s ease-in-out infinite;
+}
 #theaters {
   position: absolute;
   background-color: #ddab3fff;
@@ -62,9 +76,30 @@ body {
   left: 81%;
   bottom: 4%;
 }
+#theaters:hover {
+  animation: pulse-fast 0.5s ease-in-out infinite;
+}
 #CPS {
   position: absolute;
-  left: 44.8%;
-  top: 42%;
+  top: 13%;
   scale: 0.7;
+  z-index: 10;
+}
+#total {
+  position: absolute;
+  font-size: 23px;
+  top: 7%;
+  left: 50%;
+  transform: translate(-50%);
+  justify-items: center;
+  z-index: 10;
+}
+
+@keyframes pulse-fast {
+  0%, 100% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.15);
+  }
 }
